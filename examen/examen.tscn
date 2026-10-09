@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://eq7mfqrv8w77"]
+
+[ext_resource type="Script" uid="uid://c2d4exr82bgtv" path="res://player_examen.gd" id="1_pgf74"]
+[ext_resource type="Texture2D" uid="uid://bpppets131m5i" path="res://icon.svg" id="2_cn8o2"]
+[ext_resource type="PackedScene" uid="uid://v8mx0c0o13k1" path="res://nivel.tscn" id="3_cn8o2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfkbx"]
+size = Vector2(128, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aui74"]
+size = Vector2(110, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vicex"]
+size = Vector2(140, 132)
+
+[node name="Node2D" type="Node2D" unique_id=863596312]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1581509631 groups=["Jugador"]]
+position = Vector2(39, -39)
+script = ExtResource("1_pgf74")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1088796955]
+texture = ExtResource("2_cn8o2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=148005875]
+shape = SubResource("RectangleShape2D_lfkbx")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=988516751]
+
+[node name="Node2D" parent="." unique_id=391008844 instance=ExtResource("3_cn8o2")]
+position = Vector2(3, 171)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1695392629]
+position = Vector2(549, -31)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1001154765]
+shape = SubResource("RectangleShape2D_aui74")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1044848961]
+texture = ExtResource("2_cn8o2")
+
+[node name="Area2D" type="Area2D" parent="StaticBody2D" unique_id=992907405]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D" unique_id=1922640694]
+shape = SubResource("RectangleShape2D_vicex")
+
+[connection signal="body_entered" from="StaticBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
